@@ -1,4 +1,11 @@
 {
   "name": "rime-emoji-scheme",
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./build/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
 }

@@ -5,10 +5,28 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@types/node@npm:^17.0.41":
+  version: 17.0.41
+  resolution: "@types/node@npm:17.0.41"
+  checksum: ddaf9e7decb487850a9bbfeb670b41c9d35c5b1597c4c4f889419b65042d776e9041ed533c7afc1bac30cad1e9dcfd984085b4a35312efe8ea5eaf0bd36a8191
+  languageName: node
+  linkType: hard
+
+"emojibase-data@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "emojibase-data@npm:7.0.1"
+  peerDependencies:
+    emojibase: "*"
+  checksum: 54335bebf30b9e403b8abc33fed761e0378ebc2aad56b285706bdda20777a3f00ea0700253a853d40f7c20817788adbb580e50cbcb29894a16e2a16f8c1b7f9f
+  languageName: node
+  linkType: hard
+
 "rime-emoji-scheme@workspace:.":
   version: 0.0.0-use.local
   resolution: "rime-emoji-scheme@workspace:."
   dependencies:
+    "@types/node": ^17.0.41
+    emojibase-data: ^7.0.1
     typescript: ^4.7.3
   languageName: unknown
   linkType: soft

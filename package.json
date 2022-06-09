@@ -1,11 +1,16 @@
 {
   "name": "rime-emoji-scheme",
   "packageManager": "yarn@3.2.1",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node ./build/index.js"
   },
   "devDependencies": {
+    "@types/node": "^17.0.41",
     "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "emojibase-data": "^7.0.1"
   }
 }

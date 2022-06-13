@@ -21,4 +21,4 @@ export const SCHEMA_DESCRIPTION =
     "A simple schema for emoji input, using Discord's short phrases as the main input method.";
 export const SCHEMA_ID = 'emoji_shortbook';
 export const SCHEMA_NAME = 'Emoji Shortbook';
-export const SCHEMA_VERSION = '1.0.0.0';
+export const SCHEMA_VERSION = '1.0.0';

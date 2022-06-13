@@ -6,18 +6,30 @@
 import fs from 'fs';
 import YAML from 'yaml';
 import emojis from 'emojibase-data/en/data.json' assert { type: 'json' };
+import shorthands from 'emojibase-data/en/shortcodes/joypixels.json' assert { type: 'json' };
 
 import * as config from '../config';
 
-const schema = {};
+const schema = {
+    name: config.SCHEMA_ID,
+    version: config.SCHEMA_VERSION,
+    sort: 'original',
+    //use_preset_vocabulary: false,
+};
 
 export const buildDict = () => {
     console.log('Building...');
 
-    const dict = fs.openSync(`${config.OUTPUT_LOCATION}/dict.txt`, 'w');
+    const dict = fs.openSync(`${config.OUTPUT_LOCATION}/${config.SCHEMA_ID}.dict.yaml`, 'w');
+    fs.writeFileSync(dict, `${config.SCHEMA_HEADER}`);
+    fs.writeFileSync(dict, `---\n${YAML.stringify(schema)}...\n`);
     emojis.forEach(emoji => {
-        const line = `${emoji.emoji}\n`;
-        fs.writeFileSync(dict, line);
+        let codes: string[] = [];
+        //codes.push(emoji.hexcode);
+        if (shorthands[emoji.hexcode] == null) return;
+
+        codes.push(shorthands[emoji.hexcode] as string);
+        fs.writeFileSync(dict, `${emoji.emoji}\t${codes.join('\t')}\n`);
     });
     fs.closeSync(dict);
 };

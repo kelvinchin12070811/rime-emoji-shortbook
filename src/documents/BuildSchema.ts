@@ -9,18 +9,49 @@ import fs from 'fs';
 import * as config from '../config';
 
 const schema = {
-    schema_id: config.SCHEMA_ID,
-    name: config.SCHEMA_NAME,
-    version: config.SCHEMA_VERSION,
-    author: config.SCHEMA_AUTHORS,
-    description: config.SCHEMA_DESCRIPTION,
+    schema: {
+        schema_id: config.SCHEMA_ID,
+        name: config.SCHEMA_NAME,
+        version: config.SCHEMA_VERSION,
+        author: config.SCHEMA_AUTHORS,
+        description: config.SCHEMA_DESCRIPTION,
+    },
+    engine: {
+        processors: [
+            'key_binder',
+            'speller',
+            'punctuator',
+            'selector',
+            'navigator',
+            'express_editor',
+        ],
+        segmentors: ['abc_segmentor', 'punct_segmentor', 'fallback_segmentor'],
+        translators: ['echo_translator', 'table_translator'],
+    },
+    translator: {
+        dictionary: config.SCHEMA_ID,
+    },
+    key_binder: {
+        bindings: [
+            {
+                when: 'paging',
+                accept: 'comma',
+                send: 'Page_Up',
+            },
+            {
+                when: 'has_menu',
+                accept: 'period',
+                send: 'Page_Down',
+            },
+        ],
+    },
 };
 
 export const buildSchema = () => {
     console.log('Generating schema metadata...');
 
-    const file = YAML.stringify({ schema });
-    const hwndFile = fs.openSync(`${config.OUTPUT_LOCATION}/emoji_shortbook_schema.yaml`, 'w');
+    const file = YAML.stringify(schema);
+    const hwndFile = fs.openSync(`${config.OUTPUT_LOCATION}/${config.SCHEMA_ID}.schema.yaml`, 'w');
     fs.writeFileSync(hwndFile, `${config.SCHEMA_HEADER}${file}`);
     fs.closeSync(hwndFile);
 };

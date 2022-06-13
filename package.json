@@ -3,8 +3,9 @@
     "packageManager": "yarn@3.2.1",
     "type": "module",
     "scripts": {
-        "build": "tsc",
-        "start": "node --experimental-json-modules --es-module-specifier-resolution=node ./build/index.js"
+        "build:compile": "tsc",
+        "build:main": "node --experimental-json-modules --es-module-specifier-resolution=node ./build/index.js",
+        "build": "yarn build:compile && yarn build:main"
     },
     "devDependencies": {
         "@types/node": "^17.0.41",

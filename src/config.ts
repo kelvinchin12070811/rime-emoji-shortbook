@@ -12,7 +12,7 @@ export const SCHEMA_HEADER =
 # Licensed under the MPL-2.0 license.
 #
 # Project repository:
-# https://www.github.com/kelvinchin12070811/
+# https://github.com/kelvinchin12070811/rime-shorthand-emoji
 `.trim() + '\n';
 
 export const SCHEMA_AUTHORS = ['Kelvin Chin <kelvinchin12070811.gitlab.io>'];

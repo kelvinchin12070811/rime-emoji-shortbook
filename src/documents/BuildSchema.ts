@@ -32,18 +32,7 @@ const schema = {
         dictionary: config.SCHEMA_ID,
     },
     key_binder: {
-        bindings: [
-            {
-                when: 'paging',
-                accept: 'comma',
-                send: 'Page_Up',
-            },
-            {
-                when: 'has_menu',
-                accept: 'period',
-                send: 'Page_Down',
-            },
-        ],
+        import_preset: 'default',
     },
 };
 

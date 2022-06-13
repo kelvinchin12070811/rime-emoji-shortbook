@@ -25,10 +25,19 @@ export const buildDict = () => {
     fs.writeFileSync(dict, `---\n${YAML.stringify(schema)}...\n`);
     emojis.forEach(emoji => {
         let codes: string[] = [];
-        //codes.push(emoji.hexcode);
-        if (shorthands[emoji.hexcode] == null) return;
 
-        codes.push(shorthands[emoji.hexcode] as string);
+        const emojiShorthands = shorthands[emoji.hexcode];
+        if (emojiShorthands) {
+            if (typeof emojiShorthands === typeof [])
+                (emojiShorthands as string[]).forEach((shorthand: string) => {
+                    return codes.push(shorthand.replace(/_/g, ''));
+                });
+            else {
+                const shorthand = emojiShorthands as string;
+                codes.push(shorthand.replace(/_/g, ''));
+            }
+        }
+
         fs.writeFileSync(dict, `${emoji.emoji}\t${codes.join('\t')}\n`);
     });
     fs.closeSync(dict);

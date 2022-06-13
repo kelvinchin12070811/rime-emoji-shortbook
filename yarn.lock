@@ -28,9 +28,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rime-emoji-scheme@workspace:.":
+"rime-shorthand-emoji@workspace:.":
   version: 0.0.0-use.local
-  resolution: "rime-emoji-scheme@workspace:."
+  resolution: "rime-shorthand-emoji@workspace:."
   dependencies:
     "@types/node": ^17.0.41
     emojibase: ^6.1.0

@@ -16,6 +16,6 @@ export const buildSchema = () => {
 
     const file = YAML.stringify({ schema });
     const hwndFile = fs.openSync(`${config.OUTPUT_LOCATION}/emoji_shortbook_schema.yaml`, 'w');
-    fs.writeFileSync(hwndFile, `${config.SCHEMA_HEADER.trim()}\n${file}`);
+    fs.writeFileSync(hwndFile, `${config.SCHEMA_HEADER}${file}`);
     fs.closeSync(hwndFile);
 };

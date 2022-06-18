@@ -24,21 +24,37 @@ export const buildDict = () => {
     fs.writeFileSync(dict, `${config.SCHEMA_HEADER}`);
     fs.writeFileSync(dict, `---\n${YAML.stringify(schema)}...\n`);
     emojis.forEach(emoji => {
-        let codes: string[] = [];
+        let codes: Set<string> = new Set();
+
+        emoji.tags?.forEach(tag => codes.add(tag));
+        emoji.label?.split(' ').forEach(slice => codes.add(slice.replace(/[\:, ]/g, '')));
 
         const emojiShorthands = shorthands[emoji.hexcode];
         if (emojiShorthands) {
             if (typeof emojiShorthands === typeof [])
                 (emojiShorthands as string[]).forEach((shorthand: string) => {
-                    return codes.push(shorthand.replace(/_/g, ''));
+                    codes.add(shorthand.replace(/_/g, ''));
                 });
             else {
                 const shorthand = emojiShorthands as string;
-                codes.push(shorthand.replace(/_/g, ''));
+                codes.add(shorthand.replace(/_/g, ''));
             }
         }
 
-        fs.writeFileSync(dict, `${emoji.emoji}\t${codes.join('\t')}\n`);
+        codes.forEach(code => {
+            fs.writeFileSync(dict, `${emoji.emoji}\t${code}\n`);
+            fs.writeFileSync(dict, `${emoji.emoji}\t${emoji.hexcode}\n`);
+        });
+        emoji.skins?.forEach(skin => {
+            const skinTone = skin.label.match(/^.+\: (.+ skin\ tone)/)?.at(1);
+            const tokens = skinTone?.split(/[\ -]/);
+
+            codes.forEach(code => {
+                fs.writeFileSync(dict, `${skin.emoji}\t${code}`);
+                tokens?.forEach(token => fs.writeFileSync(dict, token[0]));
+                fs.writeFileSync(dict, `\n${skin.emoji}\t${skin.hexcode}\n`);
+            });
+        });
     });
     fs.closeSync(dict);
 };

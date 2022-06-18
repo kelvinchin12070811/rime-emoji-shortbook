@@ -13,7 +13,7 @@ the RIME User Data Directory and deploy RIME Refer the [RIME Help Manual](https:
 rime-shorthand-emoji needs to be builded before using. This is because it use an automated generation tool to generate
 the list of emojis instead of populating the list manually. To build the schema, nodejs and yarn is required.
 
-### i) Preparing the environment
+### i. Preparing the environment
 
 Ensure that you have nodejs and yarn installed. You may skip this section if nodejs and yarn already installed. Or you
 can get a copy of nodejs from [nodejs.org](https://nodejs.org/en/download/).
@@ -31,6 +31,8 @@ command.
 ```terminal
 npm install -g corepack
 ```
+
+### ii. Building the schema
 
 Then we can install dependencies and build the project as bellow, the built schema will be placed under the `dist`
 folder
